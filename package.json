@@ -1,0 +1,26 @@
+{
+  "name": "tongue-whisperer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --write \"lib/**/*.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonguebender/tongue-whisperer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tonguebender/tongue-whisperer/issues"
+  },
+  "homepage": "https://github.com/tonguebender/tongue-whisperer#readme",
+  "dependencies": {
+    "prettier": "^1.15.3",
+    "serverless": "^1.36.1",
+    "serverless-kms-secrets": "^1.0.3",
+    "telegraf": "^3.26.0"
+  }
+}
