@@ -5,44 +5,38 @@ provider:
   runtime: nodejs8.10
   stage: dev
   region: eu-west-2
-
-# you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
-
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
-
-# you can add packaging information here
-#package:
-#  include:
-#    - include-me.js
-#    - include-me-dir/**
-#  exclude:
-#    - exclude-me.js
-#    - exclude-me-dir/**
+  environment:
+    TELEGRAM_TOKEN: ${ssm:telegram_key}
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'sqs:SendMessage'
+        - 'sqs:GetQueueUrl'
+      Resource: 'arn:aws:sqs:eu-west-2:035313854880:task'
+    - Effect: 'Allow'
+      Action:
+        - 'sqs:ListQueues'
+      Resource: 'arn:aws:sqs:eu-west-2:035313854880:task:*'
+    - Effect: 'Allow'
+      Action:
+        - 'sqs:SendMessage'
+        - 'sqs:GetQueueUrl'
+      Resource: 'arn:aws:sqs:eu-west-2:035313854880:msg'
+    - Effect: 'Allow'
+      Action:
+        - 'sqs:ListQueues'
+      Resource: 'arn:aws:sqs:eu-west-2:035313854880:msg:*'
 
 functions:
-  hello:
-    handler: handler.hello
-    environment:
-      TELEGRAM_TOKEN: ${ssm:telegram_key}
+  input:
+    handler: handler.input
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
+  output:
+    handler: handler.output
+    events:
+      - sqs: arn:aws:sqs:eu-west-2:035313854880:msg
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
