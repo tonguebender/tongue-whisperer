@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prettier": "prettier --write \"lib/**/*.js\""
+    "prettier": "prettier --write \"lib/**/*.js\"",
+    "deploy": "serverless deploy -v"
   },
   "repository": {
     "type": "git",
