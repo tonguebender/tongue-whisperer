@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/tonguebender/tongue-whisperer#readme",
   "dependencies": {
-    "aws-sdk": "^2.388.0",
+    "aws-sdk": "^2.814.0",
     "prettier": "^1.15.3",
     "serverless": "^1.36.1",
     "telegraf": "^3.26.0"
